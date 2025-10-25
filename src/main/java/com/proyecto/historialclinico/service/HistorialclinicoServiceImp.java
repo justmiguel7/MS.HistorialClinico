@@ -27,15 +27,21 @@ public class HistorialclinicoServiceImp implements HistorialclinicoService {
     }
 
     @Override
-    public Historialclinico buscarPoridpaciente(int idpaciente) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findByIdpaciente(idpaciente);
-        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado con nombre: " + idpaciente));
+    public Historialclinico buscarPorDnipaciente(String dnipaciente) throws Exception {
+        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDnipaciente(dnipaciente);
+        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado por DNI: " + dnipaciente));
+    }
+    
+    @Override
+    public Historialclinico buscarPorDniodontologo(String dniodontologo) throws Exception {
+        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDniodontologo(dniodontologo);
+        return optHistorial.orElseThrow(() -> new Exception("Odontologo no encontrado por DNI: " + dniodontologo));
     }
 
     @Override  
-    public Historialclinico buscarPoridpacienteYidodontologo(int idpaciente, int idodontologo) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findByIdpacienteAndIdodontologo(idpaciente, idodontologo);
-        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado con nombre y apellido: " + idpaciente + " " + idodontologo));
+    public Historialclinico buscarPorDnipacienteyDniodontologo(String dnipaciente, String dniodontologo) throws Exception {
+        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDnipacienteAndDniodontologo(dnipaciente, dniodontologo);
+        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado por DNI: "+ dnipaciente + "y DNI del odontologo: " + dniodontologo));
     }
 
     @Override

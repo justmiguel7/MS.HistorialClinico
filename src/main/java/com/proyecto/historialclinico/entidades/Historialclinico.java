@@ -17,11 +17,11 @@ public class Historialclinico {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idhistorial;
 
-	@Column(name = "Idpaciente")
-	private int idpaciente;
+	@Column(name = "dnipaciente")
+	private String dnipaciente;
 
-	@Column(name = "Idodontologo")
-	private int idodontologo;
+	@Column(name = "dniodontologo")
+	private String dniodontologo;
 
 	@Column(name = "Idtratamiento")
 	private int idtratamiento;
@@ -44,12 +44,12 @@ public class Historialclinico {
 	@Column(name = "Antecedentesmedicos")
 	private String antecedentesmedicos;
 
-	public Historialclinico(int idpaciente, int idodontologo, int idtratamiento, String motivodeconsulta,  LocalDateTime fechadeconsulta,
+	public Historialclinico(String dnipaciente, String dniodontologo, int idtratamiento, String motivodeconsulta,  LocalDateTime fechadeconsulta,
 			String diagnostico, String observaciones, String alergias , String antecedentesmedicos) {
 		super();
 
-		this.idpaciente = idpaciente;
-		this.idodontologo = idodontologo;
+		this.dnipaciente = dnipaciente;
+		this.dniodontologo = dniodontologo;
 		this.idtratamiento = idtratamiento;
 		this.motivodeconsulta = motivodeconsulta;
 		this.fechadeconsulta = fechadeconsulta;
@@ -72,20 +72,20 @@ public class Historialclinico {
 		this.idhistorial = idhistorial;
 	}
 
-	public int getIdpaciente() {
-		return idpaciente;
+	public String getDnipaciente() {
+		return dnipaciente;
 	}
 
-	public void setIdpaciente(int idpaciente) {
-		this.idpaciente = idpaciente;
+	public void setDnipaciente(String dnipaciente) {
+		this.dnipaciente = dnipaciente;
 	}
 
-	public int getIdodontologo() {
-		return idodontologo;
+	public String getDniodontologo() {
+		return dniodontologo;
 	}
 
-	public void setIdodontologo(int idodontologo) {
-		this.idodontologo = idodontologo;
+	public void setDniodontologo(String dniodontologo) {
+		this.dniodontologo = dniodontologo;
 	}
 
 	public int getIdtratamiento() {

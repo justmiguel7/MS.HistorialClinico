@@ -3,9 +3,6 @@ package com.proyecto.historialclinico.dto;
 import java.time.LocalDateTime;
 
 import com.proyecto.historialclinico.entidades.Historialclinico;
-
-
-
 import jakarta.persistence.Column;
 import lombok.Data;
 
@@ -14,15 +11,11 @@ import lombok.Data;
 public class HistorialclinicoDTO {
 	
 	
-	
 	private int idhistorial;
 
+	private String dnipaciente;
 
-	private int idpaciente;
-
-
-	private int idodontologo;
-
+	private String dniodontologo;
 
 	private int idtratamiento;
 
@@ -30,29 +23,26 @@ public class HistorialclinicoDTO {
 	
 	private LocalDateTime fechadeconsulta;
 
-
 	private String diagnostico;
-
 
 	private String observaciones;
 	
 	private String alergias;
 
-	
 	private String antecedentesmedicos;
 	
 	
 	public Historialclinico toEntity( String codigo ){
-		return new Historialclinico(this.idpaciente, this.idodontologo, this.idtratamiento,this.motivodeconsulta , this.fechadeconsulta,this.diagnostico,this.observaciones, this.alergias, this.antecedentesmedicos);
+		return new Historialclinico(this.dnipaciente, this.dniodontologo, this.idtratamiento,this.motivodeconsulta , this.fechadeconsulta,this.diagnostico,this.observaciones, this.alergias, this.antecedentesmedicos);
 	}
 
 
-	public HistorialclinicoDTO(int idpaciente, int idodontologo, int idtratamiento, String motivodeconsulta, LocalDateTime fechadeconsulta,
+	public HistorialclinicoDTO(String dnipaciente, String dniodontologo, int idtratamiento, String motivodeconsulta, LocalDateTime fechadeconsulta,
 			String diagnostico, String observaciones,String alergias,  String antecedentesmedicos) {
 		super();
 
-		this.idpaciente = idpaciente;
-		this.idodontologo = idodontologo;
+		this.dnipaciente = dnipaciente;
+		this.dniodontologo = dniodontologo;
 		this.idtratamiento = idtratamiento;
 		this.motivodeconsulta = motivodeconsulta;
 		this.fechadeconsulta = fechadeconsulta;
@@ -73,23 +63,23 @@ public class HistorialclinicoDTO {
 	}
 
 
-	public int getIdpaciente() {
-		return idpaciente;
+	public String getDnipaciente() {
+		return dnipaciente;
 	}
 
 
-	public void setIdpaciente(int idpaciente) {
-		this.idpaciente = idpaciente;
+	public void setDnipaciente(String dnipaciente) {
+		this.dnipaciente = dnipaciente;
 	}
 
 
-	public int getIdodontologo() {
-		return idodontologo;
+	public String getDniodontologo() {
+		return dniodontologo;
 	}
 
 
-	public void setIdodontologo(int idodontologo) {
-		this.idodontologo = idodontologo;
+	public void setDniodontologo(String dniodontologo) {
+		this.dniodontologo = dniodontologo;
 	}
 
 

@@ -2,10 +2,6 @@ package com.proyecto.historialclinico.controller;
 
 import java.util.List;
 
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.historialclinico.entidades.Historialclinico;
 import com.proyecto.historialclinico.dto.HistorialclinicoDTO;
-
 import com.proyecto.historialclinico.service.HistorialclinicoService;
 
 import jakarta.validation.Valid;
@@ -30,35 +25,34 @@ import jakarta.validation.Valid;
 @RequestMapping("/historialclinico")
 public class HistorialclinicoController {
 
-	
-	
 	@Autowired
 	private HistorialclinicoService historialclinicoService;
 		
-
-  @RequestMapping(value="/agregar", method={RequestMethod.POST})
+	@RequestMapping(value="/agregar", method={RequestMethod.POST})
 	public ResponseEntity<HistorialclinicoDTO> persistirhistorialclinico (@Valid @RequestBody  HistorialclinicoDTO historialclinicoDTO ) throws Exception{
-		
 	  historialclinicoService.agregarhistorial(historialclinicoDTO);
-
-		return new ResponseEntity<HistorialclinicoDTO>(historialclinicoDTO, HttpStatus.CREATED);
+	  	return new ResponseEntity<HistorialclinicoDTO>(historialclinicoDTO, HttpStatus.CREATED);
 	}
 	
 	
-	@RequestMapping(value="/buscar/{paciente_id}", method={RequestMethod.GET})
-	public ResponseEntity<Historialclinico> busarPorNombre ( @PathVariable("idpaciente") int idpaciente) throws Exception{
-		Historialclinico historial = historialclinicoService.buscarPoridpaciente(idpaciente);
+	@RequestMapping(value="/buscarPaciente/{dnipaciente}", method={RequestMethod.GET})
+	public ResponseEntity<Historialclinico> busarPorDniPaciente ( @PathVariable("dnipaciente") String dnipaciente) throws Exception{
+		Historialclinico historial = historialclinicoService.buscarPorDnipaciente(dnipaciente);
+		  return new ResponseEntity<>(historial,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/buscarOdontologo/{dniodontologo}", method={RequestMethod.GET})
+	public ResponseEntity<Historialclinico> busarPorDniOdontologo ( @PathVariable("dniodontologo") String dniodontologo) throws Exception{
+		Historialclinico historial = historialclinicoService.buscarPorDniodontologo(dniodontologo);
 		  return new ResponseEntity<>(historial,HttpStatus.OK);
 	}
 	
 	
-	@RequestMapping(value="/buscarPorodontologo/{idpaciente}/{idodontologo}", method={RequestMethod.GET})
-	public ResponseEntity<Historialclinico> buscarPorApellido ( @PathVariable("idpaciente") int idpaciente, @PathVariable("idpodontologo") int idodontologo) throws Exception{
-		Historialclinico historial = historialclinicoService.buscarPoridpacienteYidodontologo(idpaciente, idodontologo);
+	@RequestMapping(value="/buscarPacienteYOdontologo/{dnipaciente}/{dniodontologo}", method={RequestMethod.GET})
+	public ResponseEntity<Historialclinico> buscarPorDniPacienteYDniOdontologo ( @PathVariable("dnipaciente") String dnipaciente, @PathVariable("dniodontologo") String dniodontologo) throws Exception{
+		Historialclinico historial = historialclinicoService.buscarPorDnipacienteyDniodontologo(dnipaciente, dniodontologo);
 		  return new ResponseEntity<>(historial,HttpStatus.OK);
 	}
-	
-	
 	
 	
 	@RequestMapping(value="/listado", method={RequestMethod.GET})
