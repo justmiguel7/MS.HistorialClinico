@@ -6,9 +6,7 @@ import com.proyecto.historialclinico.entidades.Historialclinico;
 
 public interface HistorialclinicoRepository extends JpaRepository<Historialclinico, Integer> {
 
-    Optional<Historialclinico> findByDnipaciente(String dnipaciente) throws Exception; 
-    
-    Optional<Historialclinico> findByDniodontologo(String dniodontologo) throws Exception; 
+	Optional<Historialclinico> findByDnipaciente(String dnipaciente);
+	Optional<Historialclinico> findByDnipacienteAndDniodontologo(String dnipaciente, String dniodontologo);
 
-    Optional<Historialclinico> findByDnipacienteAndDniodontologo(String dnipaciente, String dniodontologo) throws Exception; 
 }

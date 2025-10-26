@@ -1,68 +1,47 @@
 package com.proyecto.historialclinico.service;
 
 import java.util.List;
-
 import java.util.Optional;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;  // <-- IMPORTANTE
-
+import org.springframework.stereotype.Service;
 import com.proyecto.historialclinico.entidades.Historialclinico;
 import com.proyecto.historialclinico.repository.HistorialclinicoRepository;
-import com.proyecto.historialclinico.service.HistorialclinicoService;
 import com.proyecto.historialclinico.dto.HistorialclinicoDTO;
-
 
 @Service
 public class HistorialclinicoServiceImp implements HistorialclinicoService {
 
-	
-	 @Autowired
-	    private HistorialclinicoRepository historialclinicorepository;
-	@Override
-	public Historialclinico agregarhistorial(HistorialclinicoDTO historialclinicoDTO) throws Exception {
-	    String codigo = UUID.randomUUID().toString();
-        return historialclinicorepository.save(historialclinicoDTO.toEntity(codigo));
+    @Autowired
+    private HistorialclinicoRepository historialRepo;
+
+    @Override
+    public Historialclinico agregarhistorial(HistorialclinicoDTO dto) throws Exception {
+        return historialRepo.save(dto.toEntity());
     }
 
     @Override
     public Historialclinico buscarPorDnipaciente(String dnipaciente) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDnipaciente(dnipaciente);
-        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado por DNI: " + dnipaciente));
-    }
-    
-    @Override
-    public Historialclinico buscarPorDniodontologo(String dniodontologo) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDniodontologo(dniodontologo);
-        return optHistorial.orElseThrow(() -> new Exception("Odontologo no encontrado por DNI: " + dniodontologo));
+        return historialRepo.findByDnipaciente(dnipaciente)
+                .orElseThrow(() -> new Exception("No se encontró historial del paciente con DNI: " + dnipaciente));
     }
 
-    @Override  
-    public Historialclinico buscarPorDnipacienteyDniodontologo(String dnipaciente, String dniodontologo) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findByDnipacienteAndDniodontologo(dnipaciente, dniodontologo);
-        return optHistorial.orElseThrow(() -> new Exception("Paciente no encontrado por DNI: "+ dnipaciente + "y DNI del odontologo: " + dniodontologo));
+    @Override
+    public Historialclinico buscarPorDnipacienteYdniodontologo(String dnipaciente, String dniodontologo) throws Exception {
+        return historialRepo.findByDnipacienteAndDniodontologo(dnipaciente, dniodontologo)
+                .orElseThrow(() -> new Exception("No se encontró historial del paciente " + dnipaciente + " con odontólogo " + dniodontologo));
     }
 
     @Override
     public List<Historialclinico> listado() throws Exception {
-        return historialclinicorepository.findAll();
+        return historialRepo.findAll();
     }
 
     @Override
     public void eliminar(int idhistorial) throws Exception {
-        Optional<Historialclinico> optHistorial = historialclinicorepository.findById(idhistorial);
-        Historialclinico historial = optHistorial.orElseThrow(() -> new Exception("Historial no encontrado con el ID: " + idhistorial));
-        historialclinicorepository.delete(historial);
+        Optional<Historialclinico> historial = historialRepo.findById(idhistorial);
+        if (historial.isEmpty()) {
+            throw new Exception("Historial no encontrado con ID: " + idhistorial);
+        }
+        historialRepo.delete(historial.get());
     }
-
-
-
-  
-	
-    	
-
-	
-	}
-
-
+}
