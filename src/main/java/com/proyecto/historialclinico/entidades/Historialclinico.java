@@ -21,7 +21,7 @@ public class Historialclinico {
     @Column(name = "Idturno")
     private int idturno;
 
-    @Column(name = "Idtratamiento")
+    @Column(name = "Idtratamiento") // Solo guardamos el ID
     private int idtratamiento;
 
     private String motivodeconsulta;

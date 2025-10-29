@@ -11,7 +11,7 @@ import com.proyecto.historialclinico.service.HistorialclinicoService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/historialclinico")
 public class HistorialclinicoController {
 

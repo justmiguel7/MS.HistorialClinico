@@ -11,7 +11,7 @@ public class HistorialclinicoDTO {
     private String dnipaciente;
     private String dniodontologo;
     private int idturno;
-    private int idtratamiento;
+    private int idtratamiento; // Solo ID
     private String motivodeconsulta;
     private LocalDateTime fechadeconsulta;
     private String diagnostico;
@@ -33,6 +33,8 @@ public class HistorialclinicoDTO {
             this.antecedentesmedicos
         );
     }
+
+
 
     public HistorialclinicoDTO() {}
 
