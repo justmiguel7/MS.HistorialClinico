@@ -50,4 +50,11 @@ public class HistorialclinicoServiceImp implements HistorialclinicoService {
         }
         historialRepo.delete(historial.get());
     }
+    
+    @Override
+    public Historialclinico buscarPorId(int id) throws Exception {
+        return historialRepo.findById(id)
+            .orElseThrow(() -> new Exception("No se encontró el historial clínico con id: " + id));
+    }
+
 }

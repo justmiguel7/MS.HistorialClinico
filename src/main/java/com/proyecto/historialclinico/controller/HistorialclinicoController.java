@@ -57,4 +57,13 @@ public class HistorialclinicoController {
         historialService.eliminar(idhistorial);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @GetMapping("/historial/{id}")
+    public ResponseEntity<Historialclinico> buscarPorId(@PathVariable int id) throws Exception {
+        Historialclinico historial = historialService.buscarPorId(id);
+        return new ResponseEntity<>(historial, HttpStatus.OK);
+    }
+
+    
+    
 }

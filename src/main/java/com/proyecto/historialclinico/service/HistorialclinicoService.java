@@ -10,4 +10,6 @@ public interface HistorialclinicoService {
     List<Historialclinico> buscarPorDnipacienteYdniodontologo(String dnipaciente, String dniodontologo) throws Exception;
     List<Historialclinico> listado() throws Exception;
     void eliminar(int idhistorial) throws Exception;
+    Historialclinico buscarPorId(int id) throws Exception;
+
 }
