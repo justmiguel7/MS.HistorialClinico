@@ -20,15 +20,21 @@ public class HistorialclinicoServiceImp implements HistorialclinicoService {
     }
 
     @Override
-    public Historialclinico buscarPorDnipaciente(String dnipaciente) throws Exception {
-        return historialRepo.findByDnipaciente(dnipaciente)
-                .orElseThrow(() -> new Exception("No se encontró historial del paciente con DNI: " + dnipaciente));
+    public List<Historialclinico> buscarPorDnipaciente(String dnipaciente) throws Exception {
+        List<Historialclinico> historiales = historialRepo.findByDnipaciente(dnipaciente);
+        if (historiales.isEmpty()) {
+            throw new Exception("No se encontró historial del paciente con DNI: " + dnipaciente);
+        }
+        return historiales;
     }
 
     @Override
-    public Historialclinico buscarPorDnipacienteYdniodontologo(String dnipaciente, String dniodontologo) throws Exception {
-        return historialRepo.findByDnipacienteAndDniodontologo(dnipaciente, dniodontologo)
-                .orElseThrow(() -> new Exception("No se encontró historial del paciente " + dnipaciente + " con odontólogo " + dniodontologo));
+    public List<Historialclinico> buscarPorDnipacienteYdniodontologo(String dnipaciente, String dniodontologo) throws Exception {
+        List<Historialclinico> historiales = historialRepo.findByDnipacienteAndDniodontologo(dnipaciente, dniodontologo);
+        if (historiales.isEmpty()) {
+            throw new Exception("No se encontró historial del paciente " + dnipaciente + " con odontólogo " + dniodontologo);
+        }
+        return historiales;
     }
 
     @Override

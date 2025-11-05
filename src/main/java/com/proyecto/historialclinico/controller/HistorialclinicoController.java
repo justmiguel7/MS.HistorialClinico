@@ -17,25 +17,35 @@ public class HistorialclinicoController {
 
     @Autowired
     private HistorialclinicoService historialService;
-
+    
     @PostMapping("/agregar")
-    public ResponseEntity<HistorialclinicoDTO> persistirhistorialclinico(
+    public ResponseEntity<HistorialclinicoDTO> persistirHistorialClinico(
             @Valid @RequestBody HistorialclinicoDTO historialclinicoDTO) throws Exception {
-        historialService.agregarhistorial(historialclinicoDTO);
+        
+        Historialclinico saved = historialService.agregarhistorial(historialclinicoDTO);
+        
+        // Convertimos el entity guardado a DTO
+        historialclinicoDTO.setIdhistorial(saved.getIdhistorial());
+        
         return new ResponseEntity<>(historialclinicoDTO, HttpStatus.CREATED);
     }
 
 
+
+
     @GetMapping("/buscar/{dnipaciente}")
-    public ResponseEntity<Historialclinico> buscarPorPaciente(@PathVariable String dnipaciente) throws Exception {
-        return new ResponseEntity<>(historialService.buscarPorDnipaciente(dnipaciente), HttpStatus.OK);
+    public ResponseEntity<List<Historialclinico>> buscarPorPaciente(@PathVariable String dnipaciente) throws Exception {
+        List<Historialclinico> historiales = historialService.buscarPorDnipaciente(dnipaciente);
+        return new ResponseEntity<>(historiales, HttpStatus.OK);
     }
 
     @GetMapping("/buscarPorOdontologo/{dnipaciente}/{dniodontologo}")
-    public ResponseEntity<Historialclinico> buscarPorPacienteYOdontologo(
+    public ResponseEntity<List<Historialclinico>> buscarPorPacienteYOdontologo(
             @PathVariable String dnipaciente, @PathVariable String dniodontologo) throws Exception {
-        return new ResponseEntity<>(historialService.buscarPorDnipacienteYdniodontologo(dnipaciente, dniodontologo), HttpStatus.OK);
+        List<Historialclinico> historiales = historialService.buscarPorDnipacienteYdniodontologo(dnipaciente, dniodontologo);
+        return new ResponseEntity<>(historiales, HttpStatus.OK);
     }
+
 
     @GetMapping("/listado")
     public ResponseEntity<List<Historialclinico>> listado() throws Exception {

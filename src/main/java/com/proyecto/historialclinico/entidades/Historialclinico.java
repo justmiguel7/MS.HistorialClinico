@@ -1,6 +1,7 @@
 package com.proyecto.historialclinico.entidades;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,8 +22,9 @@ public class Historialclinico {
     @Column(name = "Idturno")
     private int idturno;
 
-    @Column(name = "Idtratamiento") // Solo guardamos el ID
-    private int idtratamiento;
+    @ElementCollection
+    @Column(name = "id_tratamientos")
+    private List<Integer> idtratamientos;
 
     private String motivodeconsulta;
     private LocalDateTime fechadeconsulta;
@@ -33,13 +35,13 @@ public class Historialclinico {
 
     public Historialclinico() {}
 
-    public Historialclinico(String dnipaciente, String dniodontologo, int idturno, int idtratamiento,
+    public Historialclinico(String dnipaciente, String dniodontologo, int idturno, List<Integer> idtratamientos,
                             String motivodeconsulta, LocalDateTime fechadeconsulta, String diagnostico,
                             String observaciones, String alergias, String antecedentesmedicos) {
         this.dnipaciente = dnipaciente;
         this.dniodontologo = dniodontologo;
         this.idturno = idturno;
-        this.idtratamiento = idtratamiento;
+        this.idtratamientos = idtratamientos;
         this.motivodeconsulta = motivodeconsulta;
         this.fechadeconsulta = fechadeconsulta;
         this.diagnostico = diagnostico;

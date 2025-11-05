@@ -1,6 +1,7 @@
 package com.proyecto.historialclinico.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import com.proyecto.historialclinico.entidades.Historialclinico;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ public class HistorialclinicoDTO {
     private String dnipaciente;
     private String dniodontologo;
     private int idturno;
-    private int idtratamiento; // Solo ID
+    private List<Integer> idtratamientos; // ahora es lista de IDs
     private String motivodeconsulta;
     private LocalDateTime fechadeconsulta;
     private String diagnostico;
@@ -24,7 +25,7 @@ public class HistorialclinicoDTO {
             this.dnipaciente,
             this.dniodontologo,
             this.idturno,
-            this.idtratamiento,
+            this.idtratamientos,
             this.motivodeconsulta,
             this.fechadeconsulta,
             this.diagnostico,
@@ -34,17 +35,15 @@ public class HistorialclinicoDTO {
         );
     }
 
-
-
     public HistorialclinicoDTO() {}
 
-    public HistorialclinicoDTO(String dnipaciente, String dniodontologo, int idturno, int idtratamiento,
+    public HistorialclinicoDTO(String dnipaciente, String dniodontologo, int idturno, List<Integer> idtratamientos,
                                String motivodeconsulta, LocalDateTime fechadeconsulta, String diagnostico,
                                String observaciones, String alergias, String antecedentesmedicos) {
         this.dnipaciente = dnipaciente;
         this.dniodontologo = dniodontologo;
         this.idturno = idturno;
-        this.idtratamiento = idtratamiento;
+        this.idtratamientos = idtratamientos;
         this.motivodeconsulta = motivodeconsulta;
         this.fechadeconsulta = fechadeconsulta;
         this.diagnostico = diagnostico;
